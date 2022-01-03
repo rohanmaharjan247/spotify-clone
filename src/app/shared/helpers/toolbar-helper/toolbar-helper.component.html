@@ -1,0 +1,22 @@
+<ion-header collapse="fade" [translucent]="true">
+  <ion-toolbar class="top-bar">
+    <ion-buttons slot="start">
+      <ion-menu-button color="dark"></ion-menu-button>
+    </ion-buttons>
+    <ion-title slot="end">
+      <ion-item>
+        <ion-label class="profile-name" slot="end">{{ profile?.display_name }}</ion-label>
+        <ion-avatar slot="end" class="profile" id="profile-button">
+          <ion-img class="profile-image" [src]="profile?.images?.[0].url"></ion-img>
+        </ion-avatar>
+        <ion-popover trigger="profile-button">
+          <ng-template>
+            <ion-content>
+              Popover
+            </ion-content>
+          </ng-template>
+        </ion-popover>
+      </ion-item>
+    </ion-title>
+  </ion-toolbar>
+</ion-header>

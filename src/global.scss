@@ -24,3 +24,35 @@
 @import "~@ionic/angular/css/text-alignment.css";
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
+
+body, ion-content{
+  --background: linear-gradient(rgb(107, 34, 34) 10%, var(--ion-background-color) 25%);
+  --ion-font-family: 'Lato', sans-serif;
+}
+
+.logo {
+  width: 20rem;
+  margin-inline: auto;
+  margin-bottom: 0.75rem;
+}
+
+
+ion-menu {
+  --background: var(--ion-color-dark-contrast);
+}
+
+ion-card{
+ // height: 15vw;
+}
+
+
+.text-truncate, .title-text-truncate{
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.title-text-truncate{
+  -webkit-line-clamp: 1;
+}

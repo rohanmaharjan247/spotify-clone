@@ -1,0 +1,36 @@
+.login {
+  background-image: linear-gradient(to right,rgba(0, 0, 0, 0.8) 0%,rgba(0, 0, 0, 0.5) 100%), url('../../../assets/images/login-background-1.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-blend-mode: darken;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.logo-header{
+  margin-bottom: 2rem;
+}
+
+
+ion-card {
+  min-height: 50vh;
+  max-width: 100vw;
+  display: flex;
+  align-items: center;
+  ion-card-content {
+    width: 100%;
+  }
+}
+
+ion-icon {
+  size: 2.5rem;
+  margin-right: 0.25rem;
+}
+
+@media only screen and (min-width: 720px){
+  ion-card{
+    max-width: 20vw;
+  }
+}

@@ -1,0 +1,32 @@
+<ion-split-pane contentId="main">
+  <ion-menu contentId="main" color="dark">
+    <ion-content>
+      <ion-list>
+        <ion-list-header>
+          <ion-img class="logo" src="assets/icon/spotify-1.svg"></ion-img>
+        </ion-list-header>
+        <ion-menu-toggle autoHide="false" class="pages" *ngFor="let page of appPages">
+          <ion-item [routerLink]="[page.url]" routerDirection="root" lines="none" routerLinkActive="active">
+            <ion-icon slot="start" [name]="page.icon"></ion-icon>
+            <ion-label>{{page.name}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <ion-menu-toggle autoHide="false" *ngFor="let subPage of subPages" class="sub-pages">
+          <ion-item [routerLink]="[subPage.url]" routerDirection="root" lines="none" routerLinkActive="active">
+            <ion-icon slot="start" [name]="subPage.icon"></ion-icon>
+            <ion-label>{{subPage.name}}</ion-label>
+          </ion-item>
+        </ion-menu-toggle>
+        <hr />
+        <ng-container *ngIf="playlists">
+          <ion-item *ngFor="let playlist of playlists" lines="none">
+            <ion-label>
+             {{playlist.name}}
+            </ion-label>
+          </ion-item>
+        </ng-container>
+      </ion-list>
+    </ion-content>
+  </ion-menu>
+  <ion-router-outlet id="main"></ion-router-outlet>
+</ion-split-pane>
