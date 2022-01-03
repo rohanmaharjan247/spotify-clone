@@ -31,5 +31,5 @@ npm-debug.log*
 /www
 
 #custom ignore
-src/app/shared/contants
+/src/app/shared/constants/
 .angular
