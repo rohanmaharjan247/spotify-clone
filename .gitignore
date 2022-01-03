@@ -29,5 +29,5 @@ npm-debug.log*
 /platforms
 /plugins
 /www
-/src/app/shared/contants
-/.angular
+src/app/shared/contants
+.angular
