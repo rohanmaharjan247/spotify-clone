@@ -30,13 +30,40 @@ export class SpotifyWebApiService {
     });
   }
 
-  getFeaturedPlaylist(limit?: number){
+  getFeaturedPlaylist(limit?: number) {
     const params = new HttpParams().set('limit', limit ?? 10);
-    return this.httpClient.get(`${environment.apiUrl}/browse/featured-playlists`, { params });
+    return this.httpClient.get(
+      `${environment.apiUrl}/browse/featured-playlists`,
+      { params }
+    );
   }
 
-  getNewReleases(limit?: number){
+  getNewReleases(limit?: number) {
     const params = new HttpParams().set('limit', limit ?? 10);
-    return this.httpClient.get(`${environment.apiUrl}/browse/new-releases`, { params });
+    return this.httpClient.get(`${environment.apiUrl}/browse/new-releases`, {
+      params,
+    });
+  }
+
+  getAvailableGenre() {
+    return this.httpClient.get(
+      `${environment.apiUrl}/recommendations/available-genre-seeds`
+    );
+  }
+
+  getRecommendation(
+    seed_track: string,
+    seed_artists: string,
+    seed_genres: string,
+    limit?: number
+  ) {
+    const params = new HttpParams()
+      .set('seed_tracks', encodeURI(seed_track))
+      .set('seed_artists', encodeURI(seed_artists))
+      .set('seed_genres', encodeURI(seed_genres))
+      .set('limit', limit ?? 10);
+    return this.httpClient.get(`${environment.apiUrl}/recommendations`, {
+      params,
+    });
   }
 }

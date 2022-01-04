@@ -1,5 +1,5 @@
-import { takeUntil } from 'rxjs/operators';
-import { Subject } from 'rxjs';
+import { switchMap, takeUntil } from 'rxjs/operators';
+import { forkJoin, Subject } from 'rxjs';
 import { SpotifyWebApiService } from './../services/spotify-web-api.service';
 import { Router } from '@angular/router';
 import { HelpersService } from './../shared/helpers.service';
@@ -19,6 +19,8 @@ export class HomePage implements OnInit, OnDestroy {
 
   newReleases: any;
 
+  recommendations: any;
+
   constructor(
     private helperService: HelpersService,
     private router: Router,
@@ -35,6 +37,7 @@ export class HomePage implements OnInit, OnDestroy {
       this.getUserTopTracks();
       this.getFeaturedPlaylist();
       this.getNewReleases();
+      this.getRecommendation();
     }
   }
 
@@ -63,6 +66,25 @@ export class HomePage implements OnInit, OnDestroy {
       .subscribe((result: any) => {
         this.newReleases = result.albums?.items;
       });
+  }
+
+  getRecommendation(){
+    const seed_artists = this.spotifyWebService.getUsersTopArtists(2);
+    const seed_tracks = this.spotifyWebService.getUserTopTracks(2);
+
+    forkJoin([seed_artists, seed_tracks]).pipe(
+      switchMap((result: any) => {
+        const seedartists = result[0]?.items?.map(a => a.id).join(',');
+        const seedtracks = result[1]?.items?.map(a => a.id).join(',');
+        const seedgenres = result[0]?.items?.map(a => a.genres)?.[0].splice(0, 1);
+
+        return this.spotifyWebService.getRecommendation(seedtracks, seedartists, seedgenres)
+      }),
+      takeUntil(this.toUnsubscribe$)
+    ).subscribe((result: any) =>{
+     this.recommendations = result.tracks;
+
+    });
   }
 
   get greetings() {

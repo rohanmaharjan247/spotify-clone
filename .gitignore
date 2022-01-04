@@ -31,5 +31,5 @@ npm-debug.log*
 /www
 
 #custom ignore
-/src/app/shared/constants/
+/src/app/shared/constants/spotify-api.ts
 .angular
