@@ -25,7 +25,9 @@ export class HomePage implements OnInit, OnDestroy {
     private helperService: HelpersService,
     private router: Router,
     private spotifyWebService: SpotifyWebApiService
-  ) {}
+  ) {
+    this.helperService.setTitle('Home');
+  }
   ngOnDestroy(): void {
     this.toUnsubscribe$.next();
     this.toUnsubscribe$.complete();
@@ -106,21 +108,6 @@ export class HomePage implements OnInit, OnDestroy {
 
 
   artistsName(artists: any) {
-    let artistName = '';
-    if (artists?.length > 1) {
-      artists.forEach((element, index) => {
-        if(index === 0){
-          artistName += `${element.name} (Feat.`
-        }
-        else if(index === artists.length - 1){
-          artistName += `${element.name})`;
-        }
-        else{
-          artistName += `${element.name}, `;
-        }
-      });
-      return artistName;
-    }
-    return artists[0].name;
+    return this.helperService.artistsName(artists);
   }
 }

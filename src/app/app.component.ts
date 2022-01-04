@@ -1,11 +1,9 @@
 import { HelpersService } from './shared/helpers.service';
-import { SpotifyWebApiService } from './services/spotify-web-api.service';
 import { TitleCasePipe } from '@angular/common';
-import { AfterViewChecked, AfterViewInit, Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
 
 @Component({
   selector: 'app-root',
@@ -57,7 +55,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ) {
     router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        this.setPageTitle(event.url);
+        //this.setPageTitle(event.url);
         this.isAuthenticated = this.helperService.isAuthenticated();
       }
     });

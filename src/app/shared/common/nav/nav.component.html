@@ -19,7 +19,7 @@
         </ion-menu-toggle>
         <hr />
         <ng-container *ngIf="playlists">
-          <ion-item *ngFor="let playlist of playlists" lines="none">
+          <ion-item *ngFor="let playlist of playlists" lines="none" [routerLink]="['/playlists', playlist.id]" routerLinkActive="playlist-active" routerDirection="root">
             <ion-label>
              {{playlist.name}}
             </ion-label>

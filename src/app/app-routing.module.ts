@@ -15,6 +15,10 @@ const routes: Routes = [
     path: 'login',
     loadChildren: () => import('./auth/login/login.module').then( m => m.LoginPageModule)
   },
+  {
+    path: 'playlists/:playlistId',
+    loadChildren: () => import('./user/user-playlists/user-playlists.module').then( m => m.UserPlaylistsPageModule)
+  },
 ];
 
 @NgModule({

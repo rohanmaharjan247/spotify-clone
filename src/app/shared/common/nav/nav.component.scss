@@ -43,3 +43,12 @@ ion-list {
 .pages ion-label, .sub-pages ion-label{
   font-weight: 900;
 }
+
+ion-item:hover{
+  --color: var(--ion-color-light-contrast);
+  --background: none;
+}
+
+.playlist-active{
+  color: var(--ion-color-light-contrast);
+}
