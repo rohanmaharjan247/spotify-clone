@@ -2,11 +2,13 @@ import { Title } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { SPOTIFYAPI } from './constants/spotify-api';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class HelpersService {
+  private profile_image = new BehaviorSubject<string>(null);
   constructor(private platform: Platform, private title: Title) {}
 
   createAuthorizeUrl() {
@@ -44,26 +46,15 @@ export class HelpersService {
     return this.platform.is(platform);
   }
 
-  artistsName(artists: any) {
-    let artistName = '';
-    if (artists?.length > 1) {
-      artists.forEach((element, index) => {
-        if(index === 0){
-          artistName += `${element.name} (Feat.`
-        }
-        else if(index === artists.length - 1){
-          artistName += `${element.name})`;
-        }
-        else{
-          artistName += `${element.name}, `;
-        }
-      });
-      return artistName;
-    }
-    return artists[0].name;
-  }
-
   setTitle(title: string){
     this.title.setTitle(`${title} - Spotify Clone`);
+  }
+
+  getProfileImage(){
+    return this.profile_image;
+  }
+
+  setProfileImage(profileImage: string){
+    this.profile_image.next(profileImage);
   }
 }

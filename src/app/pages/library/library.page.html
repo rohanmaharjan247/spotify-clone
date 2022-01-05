@@ -1,0 +1,32 @@
+<app-toolbar-helper></app-toolbar-helper>
+
+<ion-content [fullscreen]="true">
+  <ion-segment (ionChange)="segmentChanged($event)" [value]="selectedSegment">
+    <ion-segment-button [value]="librarySegment.PLAYLISTS">
+      <ion-label>Playlists</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="librarySegment.PODCASTS">
+      <ion-label>Podcasts</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="librarySegment.ARTISTS">
+      <ion-label>Artists</ion-label>
+    </ion-segment-button>
+    <ion-segment-button [value]="librarySegment.ALBUMS">
+      <ion-label>Albums</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ng-container [ngSwitch]="selectedSegment">
+    <div *ngSwitchCase="librarySegment.PLAYLISTS">
+      <app-playlists></app-playlists>
+    </div>
+    <div *ngSwitchCase="librarySegment.PODCASTS">
+      <app-podcasts></app-podcasts>
+    </div>
+    <div *ngSwitchCase="librarySegment.ARTISTS">
+      <app-artists></app-artists>
+    </div>
+    <div *ngSwitchCase="librarySegment.ALBUMS">
+      <app-albums></app-albums>
+    </div>
+  </ng-container>
+</ion-content>

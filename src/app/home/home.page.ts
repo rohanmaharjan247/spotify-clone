@@ -105,9 +105,4 @@ export class HomePage implements OnInit, OnDestroy {
   {
     return localStorage.getItem('display_name');
   }
-
-
-  artistsName(artists: any) {
-    return this.helperService.artistsName(artists);
-  }
 }

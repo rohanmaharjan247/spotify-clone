@@ -1,3 +1,4 @@
+import { HelpersService } from './../../helpers.service';
 import { SpotifyWebApiService } from './../../../services/spotify-web-api.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
@@ -12,7 +13,7 @@ export class ToolbarHelperComponent implements OnInit, OnDestroy {
   private readonly toUnsubscribe$ = new Subject<void>();
   profile: any;
 
-  constructor(  private spotifyWebService: SpotifyWebApiService) { }
+  constructor(  private spotifyWebService: SpotifyWebApiService, private helperService: HelpersService) { }
   ngOnDestroy(): void {
     this.toUnsubscribe$.next();
     this.toUnsubscribe$.complete();
@@ -29,6 +30,7 @@ export class ToolbarHelperComponent implements OnInit, OnDestroy {
       .subscribe((result: any) => {
         this.profile = result;
         localStorage.setItem('display_name', result.display_name);
+        this.helperService.setProfileImage(result?.images?.[0].url);
       });
   }
 

@@ -56,31 +56,29 @@
 
 .playlist-tracks{
   padding-inline: 1.875rem;
+  margin-top: 1.5rem;
 }
 
-.table-responsive{
-  width: 100%;
-  margin-top: 1rem;
-  thead{
-    border-bottom: 1px solid var(--ion-color-medium);
-  }
-  thead > tr > th, tbody > tr > td{
-    letter-spacing: 2px;
-    font-size: 0.875rem;
-    padding-inline: 1rem;
-    &:not(:first-child){
-      text-align: left;
-    }
-  }
-  thead > tr > th{
-    text-transform: uppercase;
-    color: var(--ion-color-medium);
-  }
-  tbody > tr:first-child > td{
-    padding-top: 1rem;
-  }
+.playlist-tracks-header{
+  letter-spacing: 2px;
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  color: var(--ion-color-medium);
+  border-bottom: 1px solid var(--ion-color-medium);
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
 }
 
-.w-title{
-  width: 35%;
+.playlist-profile-image{
+  width: 1.563rem;
+  height: 1.563rem;
+  margin-right: .625rem;
+}
+
+.playlist-tracks-name{
+  display: flex;
+  align-items: center;
+  .playlist-tracks-content{
+    margin-left: 1rem;
+  }
 }

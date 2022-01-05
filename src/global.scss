@@ -25,11 +25,6 @@
 @import "~@ionic/angular/css/text-transformation.css";
 @import "~@ionic/angular/css/flex-utils.css";
 
-body, ion-content{
-  --background: linear-gradient(rgb(107, 34, 34) 10%, var(--ion-background-color) 25%);
-  --ion-font-family: 'Lato', sans-serif;
-}
-
 .logo {
   margin-inline: auto;
   margin-bottom: 0.75rem;
@@ -38,11 +33,6 @@ body, ion-content{
 
 ion-menu {
   --background: var(--ion-color-dark-contrast);
-}
-
-
-ion-text{
-  font-family: var(--ion-font-family);
 }
 
 
@@ -55,4 +45,56 @@ ion-text{
 
 .title-text-truncate{
   -webkit-line-clamp: 1;
+}
+
+.main-card {
+  border-radius: 8px;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  ion-col {
+    display: flex;
+    justify-content: center;
+    padding: 4px;
+  }
+  ion-card {
+    width: 100%;
+  }
+}
+
+.track-image{
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  padding: 0.938rem;
+}
+
+ion-card-title{
+  font-weight: 900;
+  font-size: 1rem;
+}
+
+
+.no-playlists{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 75vh;
+  text-align: center;
+  &-icon{
+    font-size: 2.5rem;
+  }
+  h1{
+    margin-bottom: 0;
+    padding: 0;
+    font-weight: 900;
+  }
+  h3{
+    font-size: 1rem;
+    margin-top: 0.825rem;
+    margin-bottom: 1.725rem;
+  }
+  &-fw{
+    font-weight: 900;
+    --border-radius: 2rem;
+  }
 }

@@ -1,8 +1,8 @@
 import { HelpersService } from './../../shared/helpers.service';
-import { takeUntil } from 'rxjs/operators';
+import { map, takeUntil } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+import { from, Subject } from 'rxjs';
 import { PlaylistsService } from './../../services/user/playlists.service';
 
 @Component({
@@ -18,7 +18,11 @@ export class UserPlaylistsPage implements OnInit, OnDestroy {
 
   playlist: any;
 
-  constructor(private avRoute: ActivatedRoute, private playlistsService: PlaylistsService, private helperService: HelpersService) {
+  constructor(
+    private avRoute: ActivatedRoute,
+    private playlistsService: PlaylistsService,
+    private helperService: HelpersService
+  ) {
     this.avRoute.params
       .pipe(takeUntil(this.toUnsubscribe$))
       .subscribe((params) => {
@@ -34,14 +38,16 @@ export class UserPlaylistsPage implements OnInit, OnDestroy {
     this.getPlaylist();
   }
 
-  getPlaylist(){
-    if(this.playlistId){
-      this.playlistsService.getUserPlaylist(this.playlistId).pipe(takeUntil(this.toUnsubscribe$)).subscribe((result: any) => {
-        console.log(result);
-        this.playlist = result;
-        this.helperService.setTitle(`${result?.name}`);
-      })
+  getPlaylist() {
+    if (this.playlistId) {
+      this.playlistsService
+        .getUserPlaylist(this.playlistId)
+        .pipe(takeUntil(this.toUnsubscribe$))
+        .subscribe((result: any) => {
+          console.log(result);
+          this.playlist = result;
+          this.helperService.setTitle(`${result?.name}`);
+        });
     }
-
   }
 }

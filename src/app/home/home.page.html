@@ -15,7 +15,7 @@
               <ion-img class="track-image" [src]="topTrack.album?.images?.[0].url"></ion-img>
               <ion-card-header>
                 <ion-card-title class="title-text-truncate">{{topTrack.name}}</ion-card-title>
-                <ion-card-subtitle class="text-truncate">{{ artistsName(topTrack.artists) }}</ion-card-subtitle>
+                <ion-card-subtitle class="text-truncate">{{ topTrack.artists | artistsName }}</ion-card-subtitle>
               </ion-card-header>
             </ion-card>
           </ion-col>
@@ -62,7 +62,7 @@
                   {{recommendation.name}}
                 </ion-card-title>
                 <ion-card-subtitle class="text-truncate">
-                  {{ artistsName(recommendation.artists) }}
+                  {{ recommendation.artists | artistsName }}
                 </ion-card-subtitle>
               </ion-card-header>
             </ion-card>
@@ -86,7 +86,7 @@
                   {{newRelease.name}}
                 </ion-card-title>
                 <ion-card-subtitle class="text-truncate">
-                  {{ artistsName(newRelease.artists) }}
+                  {{ newRelease.artists | artistsName }}
                 </ion-card-subtitle>
               </ion-card-header>
             </ion-card>
