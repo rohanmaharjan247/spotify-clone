@@ -1,12 +1,12 @@
 <app-toolbar-helper></app-toolbar-helper>
 <ion-content [fullscreen]="true">
-  <ion-title>
-    <h1 class="greetings">{{ greetings }}</h1>
-  </ion-title>
+  <ion-label>
+    <h1 class="greetings  title-text">{{ greetings }}</h1>
+  </ion-label>
   <ng-container *ngIf="topTracks">
-    <ion-title class="heading">
-      <h2 class="top-tracks-header">{{ profile?.split(' ')[0] }}'s Recent Plays</h2>
-    </ion-title>
+    <ion-label class="heading">
+      <h2 class="top-tracks-header title-text">{{ profile?.split(' ')[0] }}'s Recent Plays</h2>
+    </ion-label>
     <div class="main-card">
       <ion-grid fixed>
         <ion-row>
@@ -25,7 +25,7 @@
   </ng-container>
   <ng-container *ngIf="featuredPlaylists">
     <ion-title class="heading">
-      <h2 class="made-for-you">Made for you</h2>
+      <h2 class="made-for-you title-text">Made for you</h2>
     </ion-title>
     <div class="main-card">
       <ion-grid fixed>
@@ -48,9 +48,9 @@
     </div>
   </ng-container>
   <ng-container *ngIf="recommendations">
-    <ion-title class="heading">
-      <h2 class="made-for-you">More of what you may like</h2>
-    </ion-title>
+    <ion-label class="heading">
+      <h2 class="made-for-you title-text">More of what you may like</h2>
+    </ion-label>
     <div class="main-card">
       <ion-grid fixed>
         <ion-row>
@@ -72,9 +72,9 @@
     </div>
   </ng-container>
   <ng-container *ngIf="newReleases">
-    <ion-title class="heading">
-      <h2 class="made-for-you">Check out some new releases from other artists</h2>
-    </ion-title>
+    <ion-label class="heading">
+      <h2 class="made-for-you title-text">Check out some new releases from other artists</h2>
+    </ion-label>
     <div class="main-card">
       <ion-grid fixed>
         <ion-row>

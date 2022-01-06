@@ -1,88 +1,89 @@
 <app-toolbar-helper></app-toolbar-helper>
 <ion-content>
-  <ng-container *ngIf="playlist">
-    <ion-grid class="playlist">
-      <ion-row>
-        <ion-col sizeXs="4" sizeSm="4" sizeMd="2" sizeLg="2" sizeXs="2">
-          <ion-img [src]="playlist?.images?.[0].url"></ion-img>
-        </ion-col>
-        <ion-col sizeXs="8" sizeSm="8" sizeMd="10" sizeLg="10" sizeXs="10" class="playlist-header">
-          <div class="playlist-content">
-            <div>
-              <ion-text class="playlist-title">Playlist</ion-text>
-            </div>
-            <div>
-              <ion-text class="playlist-name">{{ playlist?.name }}</ion-text>
-            </div>
-            <div class="playlist-description">
-              <ion-text>{{playlist?.description}}</ion-text>
-            </div>
-            <div class="playlist-owner">
+  <ng-container *ngIf="!loading">
+    <ng-container *ngIf="playlist">
+      <ion-grid class="playlist">
+        <ion-row>
+          <ion-col sizeXs="4" sizeSm="4" sizeMd="2" sizeLg="2" sizeXs="2">
+            <ion-img [src]="playlist?.images?.[0].url"></ion-img>
+          </ion-col>
+          <ion-col sizeXs="8" sizeSm="8" sizeMd="10" sizeLg="10" sizeXs="10" class="playlist-header">
+            <div class="playlist-content">
               <div>
-              <ion-avatar class="playlist-profile-image">
-                <ion-img [src]="playlist.owner | playlistProfileImage | async"></ion-img>
-              </ion-avatar>
-            </div>
-              <div class="">
-                <ion-text class="playlist-owner-name">{{ playlist?.owner?.display_name }}</ion-text>
+                <ion-text class="playlist-title">Playlist</ion-text>
               </div>
-              <div class="playlist-owner-total">
-                <ion-text>{{ playlist?.tracks?.items?.length }} songs</ion-text>
+              <div>
+                <ion-text class="playlist-name">{{ playlist?.name }}</ion-text>
               </div>
-            </div>
-          </div>
-        </ion-col>
-      </ion-row>
-    </ion-grid>
-    <div class="playlist-controls">
-      <div>
-        <ion-button color="primary" class="play-button">
-          <ion-icon name="play-sharp"></ion-icon>
-        </ion-button>
-      </div>
-      <div class="playlist-menu" *ngIf="profile_name !== playlist?.owner?.display_name">
-        <ion-icon name="heart-sharp" class="menu-icon"></ion-icon>
-      </div>
-      <div class="playlist-menu">
-        <ion-icon name="ellipsis-horizontal-outline" class="menu-icon"></ion-icon>
-      </div>
-    </div>
-    <div class="playlist-tracks">
-
-      <ion-grid>
-        <ion-row class="playlist-tracks-header">
-          <ion-col size="0.5">#</ion-col>
-          <ion-col size="4.5">Title</ion-col>
-          <ion-col size="3">Album</ion-col>
-          <ion-col size="2">Date Added</ion-col>
-          <ion-col size="2">
-            <ion-icon name="time-outline"></ion-icon>
-          </ion-col>
-        </ion-row>
-        <ion-row *ngFor="let tracks of playlist?.tracks?.items; let i=index;">
-          <ion-col size="0.5">
-            <ion-text class="ion-text-right">{{ i + 1 }}</ion-text>
-          </ion-col>
-          <ion-col size="4.5">
-            <div class="playlist-tracks-name">
-              <div class="playlist-tracks-image">
-                <ion-thumbnail>
-                  <ion-img [src]="tracks.track?.album?.images?.[0].url"></ion-img>
-                </ion-thumbnail>
+              <div class="playlist-description">
+                <ion-text>{{playlist?.description}}</ion-text>
               </div>
-              <div class="playlist-tracks-content">
-                <ion-text class="title-text-truncate">{{ tracks.track?.name }}</ion-text>
-                <ion-text>{{ tracks.track?.artists | artistsName }}</ion-text>
+              <div class="playlist-owner">
+                <div>
+                <ion-avatar class="playlist-profile-image">
+                  <ion-img [src]="playlist.owner | playlistProfileImage | async"></ion-img>
+                </ion-avatar>
+              </div>
+                <div class="">
+                  <ion-text class="playlist-owner-name">{{ playlist?.owner?.display_name }}</ion-text>
+                </div>
+                <div class="playlist-owner-total">
+                  <ion-text>{{ playlist?.tracks?.items?.length }} songs, {{ playlist?.tracks?.items | totalDuration }}</ion-text>
+                </div>
               </div>
             </div>
           </ion-col>
-          <ion-col size="3">
-            <ion-text class="title-text-truncate">{{ tracks.track?.album?.name }}</ion-text>
-          </ion-col>
-          <ion-col size="2">{{ tracks.added_at | date: 'MMM dd, yyyy' }}</ion-col>
-          <ion-col size="2">{{ tracks.track?.duration_ms | trackDuration }}</ion-col>
         </ion-row>
       </ion-grid>
-    </div>
+      <div class="playlist-controls">
+        <div>
+          <ion-button color="primary" class="play-button">
+            <ion-icon name="play-sharp"></ion-icon>
+          </ion-button>
+        </div>
+        <div class="playlist-menu" *ngIf="profile_name !== playlist?.owner?.display_name">
+          <ion-icon name="heart-sharp" class="menu-icon"></ion-icon>
+        </div>
+        <div class="playlist-menu">
+          <ion-icon name="ellipsis-horizontal-outline" class="menu-icon"></ion-icon>
+        </div>
+      </div>
+      <div class="playlist-tracks">
+        <ion-grid>
+          <ion-row class="playlist-tracks-header">
+            <ion-col size="0.5">#</ion-col>
+            <ion-col size="4.5">Title</ion-col>
+            <ion-col size="3">Album</ion-col>
+            <ion-col size="2">Date Added</ion-col>
+            <ion-col size="2">
+              <ion-icon name="time-outline"></ion-icon>
+            </ion-col>
+          </ion-row>
+          <ion-row *ngFor="let tracks of playlist?.tracks?.items; let i=index;">
+            <ion-col size="0.5">
+              <ion-text class="ion-text-right">{{ i + 1 }}</ion-text>
+            </ion-col>
+            <ion-col size="4.5">
+              <div class="playlist-tracks-name">
+                <div class="playlist-tracks-image">
+                  <ion-thumbnail>
+                    <ion-img [src]="tracks.track?.album?.images?.[0].url"></ion-img>
+                  </ion-thumbnail>
+                </div>
+                <div class="playlist-tracks-content">
+                  <ion-text class="title-text-truncate">{{ tracks.track?.name }}</ion-text>
+                  <ion-text>{{ tracks.track?.artists | artistsName }}</ion-text>
+                </div>
+              </div>
+            </ion-col>
+            <ion-col size="3">
+              <ion-text class="title-text-truncate">{{ tracks.track?.album?.name }}</ion-text>
+            </ion-col>
+            <ion-col size="2">{{ tracks.added_at | date: 'MMM dd, yyyy' }}</ion-col>
+            <ion-col size="2">{{ tracks.track?.duration_ms | trackDuration }}</ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-container>
   </ng-container>
 </ion-content>

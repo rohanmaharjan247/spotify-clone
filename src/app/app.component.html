@@ -1,6 +1,10 @@
 <ion-app>
   <ng-container *ngIf="isAuthenticated; else login">
     <app-nav></app-nav>
+
+    <ion-footer>
+      <app-spotify-player></app-spotify-player>
+    </ion-footer>
   </ng-container>
 </ion-app>
 <ng-template #login>

@@ -1,3 +1,4 @@
+import { LoadingService } from './../../shared/helpers/services/loading.service';
 import { HelpersService } from './../../shared/helpers.service';
 import { map, takeUntil } from 'rxjs/operators';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -18,10 +19,13 @@ export class UserPlaylistsPage implements OnInit, OnDestroy {
 
   playlist: any;
 
+  loading = false;
+
   constructor(
     private avRoute: ActivatedRoute,
     private playlistsService: PlaylistsService,
-    private helperService: HelpersService
+    private helperService: HelpersService,
+    private loadingService: LoadingService
   ) {
     this.avRoute.params
       .pipe(takeUntil(this.toUnsubscribe$))
@@ -38,14 +42,16 @@ export class UserPlaylistsPage implements OnInit, OnDestroy {
     this.getPlaylist();
   }
 
-  getPlaylist() {
+  async getPlaylist() {
+    this.loading = await this.loadingService.showLoader();
     if (this.playlistId) {
       this.playlistsService
         .getUserPlaylist(this.playlistId)
         .pipe(takeUntil(this.toUnsubscribe$))
-        .subscribe((result: any) => {
+        .subscribe(async (result: any) => {
           console.log(result);
           this.playlist = result;
+          this.loading = await this.loadingService.dismiss();
           this.helperService.setTitle(`${result?.name}`);
         });
     }

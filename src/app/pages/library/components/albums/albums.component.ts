@@ -1,3 +1,4 @@
+import { LoadingService } from './../../../../shared/helpers/services/loading.service';
 import { takeUntil } from 'rxjs/operators';
 import { AlbumsService } from './../../../../services/user/albums.service';
 import { Subject } from 'rxjs';
@@ -12,8 +13,9 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   private readonly toUnsubsribe$ = new Subject<void>();
 
   savedAlbums: any;
+  loading = false;
 
-  constructor(private albumsService: AlbumsService) { }
+  constructor(private albumsService: AlbumsService, private loadingService: LoadingService) { }
   ngOnDestroy(): void {
     this.toUnsubsribe$.next();
     this.toUnsubsribe$.complete();
@@ -23,10 +25,12 @@ export class AlbumsComponent implements OnInit, OnDestroy {
     this.getSavedAlbums();
   }
 
-  getSavedAlbums(){
-    this.albumsService.getSavedAlbums().pipe(takeUntil(this.toUnsubsribe$)).subscribe((result: any) => {
+  async getSavedAlbums(){
+    this.loading = await this.loadingService.showLoader();
+    this.albumsService.getSavedAlbums().pipe(takeUntil(this.toUnsubsribe$)).subscribe(async (result: any) => {
       console.log(result);
       this.savedAlbums = result.items;
+      this.loading = await this.loadingService.dismiss();
     })
   }
 

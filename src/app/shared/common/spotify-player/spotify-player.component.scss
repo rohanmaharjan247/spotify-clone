@@ -1,0 +1,58 @@
+.spotify-player {
+  display: grid;
+  grid-template-columns: 30% 40% 30%;
+  gap: 1em;
+  padding-inline: 0.875rem;
+  padding-block: 1rem;
+  width: 100%;
+}
+
+.player-item {
+  display: flex;
+  align-items: center;
+  .player-content {
+    margin-left: 1rem;
+  }
+}
+
+.artist-name {
+  color: var(--ion-color-dark-shade);
+  font-size: 0.875rem;
+}
+
+.like-button {
+  margin-left: 1.5rem;
+}
+
+.player-controls{
+  text-align: center;
+}
+
+.player-settings{
+  text-align: right;
+}
+
+.player-controls > ion-icon {
+  margin-inline: 0.875rem;
+  padding-inline: 0.875rem;
+}
+
+ion-range {
+  --height: 1px;
+}
+
+.player-settings{
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  > ion-icon{
+    margin-right: 1.25rem;
+  }
+
+  .range-width{
+    width: 12.5rem;
+    ion-range{
+      padding-left: 0;
+    }
+  }
+}

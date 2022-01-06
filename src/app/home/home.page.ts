@@ -1,3 +1,4 @@
+import { LoadingService } from './../shared/helpers/services/loading.service';
 import { switchMap, takeUntil } from 'rxjs/operators';
 import { forkJoin, Subject } from 'rxjs';
 import { SpotifyWebApiService } from './../services/spotify-web-api.service';
@@ -24,7 +25,8 @@ export class HomePage implements OnInit, OnDestroy {
   constructor(
     private helperService: HelpersService,
     private router: Router,
-    private spotifyWebService: SpotifyWebApiService
+    private spotifyWebService: SpotifyWebApiService,
+    private loadingService: LoadingService
   ) {
     this.helperService.setTitle('Home');
   }

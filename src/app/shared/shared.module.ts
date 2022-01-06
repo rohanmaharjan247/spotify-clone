@@ -8,10 +8,13 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { TrackDurationPipe } from './pipes/track-duration.pipe';
 import { ArtistsNamePipe } from './pipes/artists-name.pipe';
 import { PlaylistProfileImagePipe } from './pipes/playlist-profile-image.pipe';
+import { SpotifyPlayerComponent } from './common/spotify-player/spotify-player.component';
+import { TotalDurationPipe } from './pipes/total-duration.pipe';
 
 const declarations = [
   NavComponent,
-  ToolbarHelperComponent
+  ToolbarHelperComponent,
+  SpotifyPlayerComponent
 ]
 
 const modules = [
@@ -23,7 +26,8 @@ const modules = [
 const pipes = [
   TrackDurationPipe,
   ArtistsNamePipe,
-  PlaylistProfileImagePipe
+  PlaylistProfileImagePipe,
+  TotalDurationPipe
 ]
 
 @NgModule({

@@ -1,8 +1,10 @@
+import { LoadingService } from './../../../../shared/helpers/services/loading.service';
 import { takeUntil } from 'rxjs/operators';
 import { HelpersService } from './../../../../shared/helpers.service';
 import { PlaylistsService } from './../../../../services/user/playlists.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject } from 'rxjs';
+import { LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-playlists',
@@ -14,9 +16,12 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
 
   playlists: any;
 
+  loading = false;
+
   constructor(
     private playlistService: PlaylistsService,
-    private helperService: HelpersService
+    private helperService: HelpersService,
+    private loadingService: LoadingService
   ) {
     this.helperService.setTitle('Playlists');
   }
@@ -29,12 +34,14 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
     this.getUserPlaylists();
   }
 
-  getUserPlaylists() {
+  async getUserPlaylists() {
+    this.loading = await this.loadingService.showLoader();
     this.playlistService
       .getUserPlaylists()
       .pipe(takeUntil(this.toUnsubscribe$))
-      .subscribe((result: any) => {
+      .subscribe(async (result: any) => {
         this.playlists = result.items;
+        this.loading = await this.loadingService.dismiss();
       });
   }
 }

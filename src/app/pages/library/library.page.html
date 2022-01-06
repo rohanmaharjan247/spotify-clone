@@ -1,7 +1,7 @@
 <app-toolbar-helper></app-toolbar-helper>
 
 <ion-content [fullscreen]="true">
-  <ion-segment (ionChange)="segmentChanged($event)" [value]="selectedSegment">
+  <ion-segment scrollable (ionChange)="segmentChanged($event)" [value]="selectedSegment">
     <ion-segment-button [value]="librarySegment.PLAYLISTS">
       <ion-label>Playlists</ion-label>
     </ion-segment-button>
