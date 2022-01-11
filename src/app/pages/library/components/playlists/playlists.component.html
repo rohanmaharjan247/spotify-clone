@@ -8,7 +8,15 @@
         <ion-row>
           <ion-col sizeSm="12" sizeMd="3" *ngFor="let playlist of playlists">
             <ion-card [routerLink]="['/playlists', playlist.id]">
-              <ion-img [src]="playlist.images?.[0].url" class="track-image"></ion-img>
+              <div class="image-relative">
+                <ion-img [src]="playlist.images?.[0].url" class="track-image"></ion-img>
+                <div class="play-icon">
+                  <ion-button class="play-button" (click)="playTrack()" shape="round">
+                    <ion-icon name="play-sharp"></ion-icon>
+                  </ion-button>
+                </div>
+              </div>
+
               <ion-card-header>
                 <ion-card-title>
                   <ion-label class="title-text-truncate">{{ playlist.name }}</ion-label>

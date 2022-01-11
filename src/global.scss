@@ -27,7 +27,15 @@
 
 .logo {
   margin-inline: auto;
-  margin-bottom: 0.75rem;
+  margin-bottom: 0.75em;
+}
+
+ion-content::part(scroll){
+  margin-bottom: 7.5rem;
+}
+
+ion-content.login-page::part(scroll){
+  margin-bottom: 0;
 }
 
 ion-menu {
@@ -54,7 +62,7 @@ ion-menu {
   ion-col {
     display: flex;
     justify-content: center;
-    padding: 4px;
+    padding: 0.25rem;
   }
   ion-card {
     width: 100%;
@@ -101,4 +109,29 @@ ion-label .title-text {
   margin-inline: 1.875rem;
   margin-top: 1rem;
   font-size: 1rem;
+}
+
+.image-relative{
+  position: relative;
+}
+
+.play-icon{
+  display: none;
+}
+
+.image-relative:hover .play-icon{
+  display: block;
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  font-size: 1.5rem;
+}
+
+ion-button.play-button{
+  width: 3.125rem;
+  height: 3.125rem;
+  &::part(native){
+    padding: 0;
+    margin: 0;
+  }
 }

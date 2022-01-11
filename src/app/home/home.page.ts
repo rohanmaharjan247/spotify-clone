@@ -91,6 +91,10 @@ export class HomePage implements OnInit, OnDestroy {
     });
   }
 
+  playTrack(){
+
+  }
+
   get greetings() {
     const currentHour = new Date().getHours();
 

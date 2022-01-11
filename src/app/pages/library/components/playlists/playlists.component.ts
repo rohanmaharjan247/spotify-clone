@@ -44,4 +44,6 @@ export class PlaylistsComponent implements OnInit, OnDestroy {
         this.loading = await this.loadingService.dismiss();
       });
   }
+
+  playTrack(){}
 }

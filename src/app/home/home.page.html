@@ -1,98 +1,126 @@
 <app-toolbar-helper></app-toolbar-helper>
-<ion-content [fullscreen]="true">
-  <ion-label>
-    <h1 class="greetings  title-text">{{ greetings }}</h1>
-  </ion-label>
-  <ng-container *ngIf="topTracks">
-    <ion-label class="heading">
-      <h2 class="top-tracks-header title-text">{{ profile?.split(' ')[0] }}'s Recent Plays</h2>
+<ion-content>
+    <ion-label>
+      <h1 class="greetings  title-text">{{ greetings }}</h1>
     </ion-label>
-    <div class="main-card">
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let topTrack of topTracks">
-            <ion-card>
-              <ion-img class="track-image" [src]="topTrack.album?.images?.[0].url"></ion-img>
-              <ion-card-header>
-                <ion-card-title class="title-text-truncate">{{topTrack.name}}</ion-card-title>
-                <ion-card-subtitle class="text-truncate">{{ topTrack.artists | artistsName }}</ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="featuredPlaylists">
-    <ion-title class="heading">
-      <h2 class="made-for-you title-text">Made for you</h2>
-    </ion-title>
-    <div class="main-card">
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="3" sizeXl="1.5" *ngFor="let featuredPlaylist of featuredPlaylists">
-            <ion-card>
-              <ion-img class="track-image" [src]="featuredPlaylist.images?.[0].url"></ion-img>
-              <ion-card-header>
-                <ion-card-title class="title-text-truncate">
-                  {{featuredPlaylist.name}}
-                </ion-card-title>
-                <ion-card-subtitle class="text-truncate">
-                  {{ featuredPlaylist.description }}
-                </ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="recommendations">
-    <ion-label class="heading">
-      <h2 class="made-for-you title-text">More of what you may like</h2>
-    </ion-label>
-    <div class="main-card">
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let recommendation of recommendations">
-            <ion-card>
-              <ion-img class="track-image" [src]="recommendation.album?.images?.[0].url"></ion-img>
-              <ion-card-header>
-                <ion-card-title class="title-text-truncate">
-                  {{recommendation.name}}
-                </ion-card-title>
-                <ion-card-subtitle class="text-truncate">
-                  {{ recommendation.artists | artistsName }}
-                </ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </ng-container>
-  <ng-container *ngIf="newReleases">
-    <ion-label class="heading">
-      <h2 class="made-for-you title-text">Check out some new releases from other artists</h2>
-    </ion-label>
-    <div class="main-card">
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let newRelease of newReleases">
-            <ion-card>
-              <ion-img class="track-image" [src]="newRelease.images?.[0].url"></ion-img>
-              <ion-card-header>
-                <ion-card-title class="title-text-truncate">
-                  {{newRelease.name}}
-                </ion-card-title>
-                <ion-card-subtitle class="text-truncate">
-                  {{ newRelease.artists | artistsName }}
-                </ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
-  </ng-container>
+    <ng-container *ngIf="topTracks">
+      <ion-label class="heading">
+        <h2 class="top-tracks-header title-text">{{ profile?.split(' ')[0] }}'s Recent Plays</h2>
+      </ion-label>
+      <div class="main-card">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let topTrack of topTracks">
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img class="track-image" [src]="topTrack.album?.images?.[0].url"></ion-img>
+                  <div class="play-icon">
+                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                      <ion-icon name="play-sharp"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                <ion-card-header>
+                  <ion-card-title class="title-text-truncate">{{topTrack.name}}</ion-card-title>
+                  <ion-card-subtitle class="text-truncate">{{ topTrack.artists | artistsName }}</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="featuredPlaylists">
+      <ion-title class="heading">
+        <h2 class="made-for-you title-text">Made for you</h2>
+      </ion-title>
+      <div class="main-card">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="3" sizeXl="1.5" *ngFor="let featuredPlaylist of featuredPlaylists">
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img class="track-image" [src]="featuredPlaylist.images?.[0].url"></ion-img>
+                  <div class="play-icon">
+                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                      <ion-icon name="play-sharp"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                <ion-card-header>
+                  <ion-card-title class="title-text-truncate">
+                    {{featuredPlaylist.name}}
+                  </ion-card-title>
+                  <ion-card-subtitle class="text-truncate">
+                    {{ featuredPlaylist.description }}
+                  </ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="recommendations">
+      <ion-label class="heading">
+        <h2 class="made-for-you title-text">More of what you may like</h2>
+      </ion-label>
+      <div class="main-card">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let recommendation of recommendations">
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img class="track-image" [src]="recommendation.album?.images?.[0].url"></ion-img>
+                  <div class="play-icon">
+                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                      <ion-icon name="play-sharp"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                <ion-card-header>
+                  <ion-card-title class="title-text-truncate">
+                    {{recommendation.name}}
+                  </ion-card-title>
+                  <ion-card-subtitle class="text-truncate">
+                    {{ recommendation.artists | artistsName }}
+                  </ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-container>
+    <ng-container *ngIf="newReleases">
+      <ion-label class="heading">
+        <h2 class="made-for-you title-text">Check out some new releases from other artists</h2>
+      </ion-label>
+      <div class="main-card">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let newRelease of newReleases">
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img class="track-image" [src]="newRelease.images?.[0].url"></ion-img>
+                  <div class="play-icon">
+                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                      <ion-icon name="play-sharp"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                <ion-card-header>
+                  <ion-card-title class="title-text-truncate">
+                    {{newRelease.name}}
+                  </ion-card-title>
+                  <ion-card-subtitle class="text-truncate">
+                    {{ newRelease.artists | artistsName }}
+                  </ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-container>
 </ion-content>

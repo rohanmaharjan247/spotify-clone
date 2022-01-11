@@ -15,6 +15,9 @@ export class SpotifyPlayerComponent implements OnInit {
 
   volume = 100;
 
+  isPlaying = false;
+  playIcon = 'play';
+
   constructor(private playerService: PlayerService) { }
 
   ngOnInit() {
@@ -26,6 +29,13 @@ export class SpotifyPlayerComponent implements OnInit {
       console.log(result);
       this.player = result;
     })
+  }
+
+  playTrack(){
+    this.isPlaying = !this.isPlaying;
+
+    this.playIcon = this.isPlaying ? 'pause' : 'play';
+
   }
 
 }

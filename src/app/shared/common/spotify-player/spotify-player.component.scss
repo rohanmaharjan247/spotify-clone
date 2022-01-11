@@ -56,3 +56,13 @@ ion-range {
     }
   }
 }
+
+.playback-icons{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  ion-icon{
+    margin-inline: 0.625rem;
+    padding-inline: 0.3125rem;
+  }
+}
