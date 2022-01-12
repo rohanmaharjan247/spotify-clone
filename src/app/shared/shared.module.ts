@@ -10,6 +10,7 @@ import { ArtistsNamePipe } from './pipes/artists-name.pipe';
 import { PlaylistProfileImagePipe } from './pipes/playlist-profile-image.pipe';
 import { SpotifyPlayerComponent } from './common/spotify-player/spotify-player.component';
 import { TotalDurationPipe } from './pipes/total-duration.pipe';
+import { ImageUrlPipe } from './pipes/image-url.pipe';
 
 const declarations = [
   NavComponent,
@@ -27,7 +28,8 @@ const pipes = [
   TrackDurationPipe,
   ArtistsNamePipe,
   PlaylistProfileImagePipe,
-  TotalDurationPipe
+  TotalDurationPipe,
+  ImageUrlPipe,
 ]
 
 @NgModule({

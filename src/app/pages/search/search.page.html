@@ -1,0 +1,119 @@
+<app-toolbar-helper></app-toolbar-helper>
+
+<ion-content>
+  <ion-searchbar [formControl]="searchQuery" placeholder="Search Artists, Tracks or Albums" debounce="500" (ionChange)="searchItems()" (keyup.Enter)="searchItems()"></ion-searchbar>
+
+  <ng-container *ngIf="searchData; else search">
+    <section class="search-tracks" *ngIf="searchData.tracks?.items.length > 0">
+      <ion-label>
+        <h1>Tracks</h1>
+      </ion-label>
+      <div class="main-card">
+        <ion-grid>
+          <ion-row>
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let track of searchData.tracks.items">
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img class="track-image" [src]="track.album?.images | imageUrl"></ion-img>
+                  <div class="play-icon">
+                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                      <ion-icon name="play-sharp"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                <ion-card-header>
+                  <ion-card-title class="title-text-truncate">{{track.name}}</ion-card-title>
+                  <ion-card-subtitle class="text-truncate">{{ track.artists | artistsName }}</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </section>
+    <section class="search-tracks" *ngIf="searchData.albums?.items.length > 0">
+      <ion-label>
+        <h1>Albums</h1>
+      </ion-label>
+      <div class="main-card">
+        <ion-grid>
+          <ion-row>
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let album of searchData.albums.items">
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img class="track-image" [src]="album.images | imageUrl"></ion-img>
+                  <div class="play-icon">
+                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                      <ion-icon name="play-sharp"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                <ion-card-header>
+                  <ion-card-title class="title-text-truncate">{{album.name}}</ion-card-title>
+                  <ion-card-subtitle class="text-truncate">{{ album.artists | artistsName }}</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </section>
+    <section class="search-tracks" *ngIf="searchData.artists?.items.length > 0">
+      <ion-label>
+        <h1>Artists</h1>
+      </ion-label>
+      <div class="main-card">
+        <ion-grid>
+          <ion-row>
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let artist of searchData.artists.items">
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img class="track-image" [src]="artist.images | imageUrl"></ion-img>
+                </div>
+                <ion-card-header>
+                  <ion-card-title class="title-text-truncate">{{artist.name}}</ion-card-title>
+                  <ion-card-subtitle class="text-truncate">{{ artist.type | titlecase }}</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </section>
+    <section class="search-tracks" *ngIf="searchData.playlists?.items.length > 0">
+      <ion-label>
+        <h1>Playlists</h1>
+      </ion-label>
+      <div class="main-card">
+        <ion-grid>
+          <ion-row>
+            <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="1.5" *ngFor="let playlist of searchData.playlists.items">
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img class="track-image" [src]="playlist.images | imageUrl"></ion-img>
+                  <div class="play-icon">
+                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                      <ion-icon name="play-sharp"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                <ion-card-header>
+                  <ion-card-title class="title-text-truncate">{{playlist.name}}</ion-card-title>
+                  <ion-card-subtitle class="text-truncate">{{ playlist.owner.display_name }}</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </section>
+  </ng-container>
+  <ng-template #search>
+    <div class="search-not-found">
+      <h1>
+        <ion-icon name="search-sharp"></ion-icon>
+        Search for artists, tracks or albums
+      </h1>
+    </div>
+  </ng-template>
+</ion-content>

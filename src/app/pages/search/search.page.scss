@@ -1,0 +1,15 @@
+.search-not-found{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 75vh;
+}
+
+.search-tracks{
+  margin-inline: 0.9375rem;
+}
+
+ion-searchbar{
+  --background: var(--ion-color-light);
+  --color: var(--ion-color-dark);
+}
