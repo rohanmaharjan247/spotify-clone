@@ -1,0 +1,47 @@
+// .artist-content{
+//   display: flex;
+//   height: 100%;
+//   align-items: flex-start;
+//   flex-direction: column;
+//   ion-text{
+//     display: block;
+//   }
+// }
+
+ion-img.artist-image::part(image) {
+  border-radius: 100%;
+  width: 15.625rem;
+  height: 15.625rem;
+}
+
+.artist-header {
+  align-self: flex-end;
+}
+
+.header-title {
+  font-size: 1.375rem;
+  font-weight: 900;
+  margin: 0.9375rem 3.125rem;
+  padding-inline: 1.5625rem;
+}
+
+.playlist-controls{
+  display: flex;
+  align-items: center;
+  padding-inline: 2rem;
+  ion-button.play-button{
+    --border-radius: 100%;
+    width: 50px;
+    height: 50px;
+    ion-icon{
+      font-size: 1rem;
+    }
+  }
+
+  .playlist-menu{
+    margin-left: 1.5rem;
+    .menu-icon{
+      font-size: 1.5rem;
+    }
+  }
+}

@@ -3,6 +3,9 @@
     <ion-buttons slot="start">
       <ion-menu-button color="dark"></ion-menu-button>
     </ion-buttons>
+    <ion-title *ngIf="!isDesktop">
+      <h1>{{title}}</h1>
+    </ion-title>
     <ion-title slot="end">
       <ion-item>
         <ion-label class="profile-name" slot="end">{{ profile?.display_name }}</ion-label>

@@ -1,3 +1,4 @@
+import { ArtistDetailComponent } from './components/artists/artist-detail/artist-detail.component';
 import { AlbumsComponent } from './components/albums/albums.component';
 import { ArtistsComponent } from './components/artists/artists.component';
 import { PodcastsComponent } from './components/podcasts/podcasts.component';
@@ -21,6 +22,6 @@ import { LibraryPage } from './library.page';
     SharedModule,
     LibraryPageRoutingModule
   ],
-  declarations: [LibraryPage, PlaylistsComponent, PodcastsComponent, ArtistsComponent, AlbumsComponent]
+  declarations: [LibraryPage, PlaylistsComponent, PodcastsComponent, ArtistsComponent, AlbumsComponent, ArtistDetailComponent]
 })
 export class LibraryPageModule {}

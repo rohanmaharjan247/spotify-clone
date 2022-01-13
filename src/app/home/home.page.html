@@ -22,7 +22,9 @@
                 </div>
                 <ion-card-header>
                   <ion-card-title class="title-text-truncate">{{topTrack.name}}</ion-card-title>
-                  <ion-card-subtitle class="text-truncate">{{ topTrack.artists | artistsName }}</ion-card-subtitle>
+                  <ion-card-subtitle class="text-truncate">
+                    <a [routerLink]="['/library/artist', topTrack.artists[0].id]" class="artist-links">{{ topTrack.artists | artistsName }}</a>
+                  </ion-card-subtitle>
                 </ion-card-header>
               </ion-card>
             </ion-col>
@@ -83,7 +85,7 @@
                     {{recommendation.name}}
                   </ion-card-title>
                   <ion-card-subtitle class="text-truncate">
-                    {{ recommendation.artists | artistsName }}
+                    <a [routerLink]="['/library/artist', recommendation.artists[0].id]" class="artist-links">{{ recommendation.artists | artistsName }}</a>
                   </ion-card-subtitle>
                 </ion-card-header>
               </ion-card>
@@ -114,7 +116,7 @@
                     {{newRelease.name}}
                   </ion-card-title>
                   <ion-card-subtitle class="text-truncate">
-                    {{ newRelease.artists | artistsName }}
+                    <a [routerLink]="['/library/artist', newRelease.artists[0].id]" class="artist-links">{{ newRelease.artists | artistsName }}</a>
                   </ion-card-subtitle>
                 </ion-card-header>
               </ion-card>

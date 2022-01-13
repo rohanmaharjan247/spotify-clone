@@ -1,6 +1,6 @@
 import { HelpersService } from './../../helpers.service';
 import { SpotifyWebApiService } from './../../../services/spotify-web-api.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, Input } from '@angular/core';
 import { Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 
@@ -11,7 +11,11 @@ import { takeUntil } from 'rxjs/operators';
 })
 export class ToolbarHelperComponent implements OnInit, OnDestroy {
   private readonly toUnsubscribe$ = new Subject<void>();
+
+  @Input() title = '';
+
   profile: any;
+  isDesktop = true;
 
   constructor(  private spotifyWebService: SpotifyWebApiService, private helperService: HelpersService) { }
   ngOnDestroy(): void {
@@ -21,6 +25,7 @@ export class ToolbarHelperComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getCurrentUserProfile();
+    this.isDesktop = this.helperService.getPlatform('desktop');
   }
 
   getCurrentUserProfile() {

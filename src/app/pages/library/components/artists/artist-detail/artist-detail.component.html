@@ -1,0 +1,137 @@
+<app-toolbar-helper></app-toolbar-helper>
+<ion-content>
+  <ng-container *ngIf="artist">
+    <ion-grid fixed>
+      <ion-row>
+        <ion-col class="d-flex image-align-right" sizeSm="12" sizeMd="3" sizeLg="4">
+          <ion-img class="artist-image image-m-r" [src]="artist.images | imageUrl"></ion-img>
+        </ion-col>
+        <ion-col sizeSm="12" sizeMd="9" sizeLg="8" class="artist-header">
+          <div class="artist-content">
+            <div>
+              <ion-text class="font-lg font-bold">
+                {{artist.name}}
+              </ion-text>
+            </div>
+            <div>
+              <ion-text>
+                {{artist.followers.total | number}} monthly listerners
+              </ion-text>
+            </div>
+          </div>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    <div class="playlist-controls">
+      <div>
+        <ion-button color="primary" class="play-button">
+          <ion-icon name="play-sharp"></ion-icon>
+        </ion-button>
+      </div>
+      <div class="playlist-menu">
+       <ion-button [color]="(isFollowing$ | async) ? 'dark' : 'primary'" fill="outline">
+         {{ (isFollowing$ | async) ? 'Following' : 'Follow' }}
+       </ion-button>
+      </div>
+      <div class="playlist-menu">
+        <ion-icon name="ellipsis-horizontal-outline" class="menu-icon"></ion-icon>
+      </div>
+    </div>
+    <ng-container *ngIf="artistTopTracks">
+      <ion-label>
+        <h2 class="header-title">Popular</h2>
+      </ion-label>
+      <ion-grid>
+        <ion-row *ngFor="let topTracks of artistTopTracks;let i=index;">
+          <ion-col size="1">
+            <ion-label class="d-block ion-text-right clr-dark-shade">{{i+1}}</ion-label>
+          </ion-col>
+          <ion-col size="8">
+            <div class="d-flex ion-align-items-center">
+              <ion-thumbnail>
+                <ion-img [src]="topTracks.album.images | imageUrl"></ion-img>
+              </ion-thumbnail>
+              <ion-label class="ion-margin-start">{{topTracks.name}}</ion-label>
+            </div>
+          </ion-col>
+          <ion-col size="3">
+            <ion-label>{{topTracks.duration_ms | trackDuration}}</ion-label>
+          </ion-col>
+        </ion-row>
+      </ion-grid>
+    </ng-container>
+    <ng-container *ngIf="artistAlbums">
+      <ion-label>
+        <h2 class="header-title">Popular releases</h2>
+      </ion-label>
+      <div class="main-card">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="3" *ngFor='let album of artistAlbums'>
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img class="track-image" [src]="album.images | imageUrl"></ion-img>
+                  <div class="play-icon">
+                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                      <ion-icon name="play-sharp"></ion-icon>
+                    </ion-button>
+                  </div>
+                </div>
+                <ion-card-header>
+                  <ion-card-title>{{album.name}}</ion-card-title>
+                  <ion-card-subtitle>{{ album.artists | artistsName }}</ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="relatedArtists">
+      <ion-label>
+        <h2 class="header-title">Fans also like</h2>
+      </ion-label>
+      <ion-slides [options]="slidesOptions">
+        <ion-slide *ngFor="let relatedArtist of relatedArtists">
+          <ion-card routerDirection="root" [routerLink]="['/library/artist', relatedArtist.id]">
+            <ion-avatar class="artists-avatar">
+              <img [src]="relatedArtist.images | imageUrl" />
+            </ion-avatar>
+            <ion-card-header>
+              <ion-card-title>{{ relatedArtist.name }}</ion-card-title>
+            </ion-card-header>
+          </ion-card>
+        </ion-slide>
+      </ion-slides>
+      <!-- <div class="main-card">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col size="3" *ngFor="let relatedArtist of relatedArtists">
+              <ion-card routerDirection="root" [routerLink]="['artist', relatedArtist.id]">
+                <ion-img class="artists-avatar" [src]="relatedArtist.images | imageUrl"></ion-img>
+                <ion-card-header>
+                  <ion-card-title>{{ relatedArtist.name }}</ion-card-title>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div> -->
+    </ng-container>
+  </ng-container>
+</ion-content>
+<ng-template #mobileTemplate>
+
+
+  <ion-list *ngIf="isDesktop; else mobileTemplate">
+    <ion-list-header>
+      <ion-label>Popular</ion-label>
+    </ion-list-header>
+    <ion-item *ngFor="let topTracks of artistTopTracks;let i=index;">
+      <ion-label>{{i+1}}</ion-label>
+      <ion-label>{{topTracks.name}}</ion-label>
+      <ion-label>{{topTracks.duration_ms | trackDuration}}</ion-label>
+    </ion-item>
+  </ion-list>
+</ng-template>
