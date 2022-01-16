@@ -1,3 +1,4 @@
+import { HelpersService } from './../../helpers.service';
 import { Router } from '@angular/router';
 import { SpotifyWebApiService } from './../../../services/spotify-web-api.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
@@ -49,13 +50,18 @@ export class NavComponent implements OnInit, OnDestroy {
 
   playlists: any;
 
-  constructor(private spotifyWebApiService: SpotifyWebApiService, private router: Router) { }
+  isDesktop = false;
+
+  constructor(private spotifyWebApiService: SpotifyWebApiService, private router: Router, private helperService: HelpersService) { }
   ngOnDestroy(): void {
     this.toUnsubscribe$.next();
     this.toUnsubscribe$.complete();
   }
 
   ngOnInit() {
+
+    this.isDesktop = this.helperService.getPlatform('desktop');
+
     this.getCurrentUserPlaylist();
 
     setTimeout(() => {

@@ -1,3 +1,4 @@
+import { HelpersService } from './../../helpers.service';
 import { takeUntil } from 'rxjs/operators';
 import { PlayerService } from './../../../services/user/player.service';
 import { Component, OnInit } from '@angular/core';
@@ -18,10 +19,15 @@ export class SpotifyPlayerComponent implements OnInit {
   isPlaying = false;
   playIcon = 'play';
 
-  constructor(private playerService: PlayerService) { }
+  isDesktop = true;
+
+  progress = 50;
+
+  constructor(private playerService: PlayerService, private helperService: HelpersService) { }
 
   ngOnInit() {
     this.getCurrentlyPlayingTrack();
+    this.isDesktop = this.helperService.getPlatform('desktop');
   }
 
   getCurrentlyPlayingTrack(){

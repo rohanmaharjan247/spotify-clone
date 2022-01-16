@@ -1,49 +1,71 @@
-<ion-item class="player-bg-color">
-  <div class="spotify-player">
-    <div class="player-item" *ngIf="player;else noPlaybackFound">
-      <div class="player-image">
-        <ion-thumbnail slot="start">
-          <ion-img [src]="player?.item?.album?.images?.[0].url"></ion-img>
-        </ion-thumbnail>
+<ng-container *ngIf="isDesktop; else mobilePlayer">
+  <ion-item class="player-bg-color">
+    <div class="spotify-player">
+      <div class="player-item" *ngIf="player;else noPlaybackFound">
+        <div class="player-image">
+          <ion-thumbnail slot="start">
+            <ion-img [src]="player?.item?.album?.images | imageUrl"></ion-img>
+          </ion-thumbnail>
+        </div>
+        <div class="player-content">
+          <ion-text class="title-text-truncate">{{ player?.item?.name }}</ion-text>
+          <ion-text class="artist-name">{{ player?.item?.artists | artistsName }}</ion-text>
+        </div>
+        <div class="like-button">
+          <ion-icon name="heart-outline"></ion-icon>
+        </div>
       </div>
-      <div class="player-content">
-        <ion-text class="title-text-truncate">{{ player?.item?.name }}</ion-text>
-        <ion-text class="artist-name">{{ player?.item?.artists | artistsName }}</ion-text>
-      </div>
-      <div class="like-button">
-        <ion-icon name="heart-outline"></ion-icon>
-      </div>
-    </div>
-    <div class="player-controls">
-      <div class="playback-icons">
-        <ion-icon name="shuffle-sharp"></ion-icon>
-        <ion-icon name="arrow-back-sharp"></ion-icon>
-        <ion-button class="play-button" shape="round" (click)="playTrack()">
-          <ion-icon class="player-icon" [name]="playIcon + '-sharp'"></ion-icon>
-        </ion-button>
-        <ion-icon name="arrow-forward-sharp"></ion-icon>
-        <ion-icon name="repeat-sharp"></ion-icon>
-      </div>
-      <ion-range>
-        <ion-text slot="start">0:00</ion-text>
-        <ion-text slot="end">0:00</ion-text>
-      </ion-range>
-    </div>
-    <div class="player-settings">
-
-      <ion-icon name="list-sharp"></ion-icon>
-      <ion-icon name="desktop-sharp"></ion-icon>
-      <div class="range-width">
-        <ion-range [pin]="false" min="0" max="100" [value]="volume">
-          <ion-icon name="volume-high-sharp" slot="start"></ion-icon>
+      <div class="player-controls">
+        <div class="playback-icons">
+          <ion-icon name="shuffle-sharp"></ion-icon>
+          <ion-icon name="arrow-back-sharp"></ion-icon>
+          <ion-button class="play-button" shape="round" (click)="playTrack()">
+            <ion-icon class="player-icon" [name]="playIcon + '-sharp'"></ion-icon>
+          </ion-button>
+          <ion-icon name="arrow-forward-sharp"></ion-icon>
+          <ion-icon name="repeat-sharp"></ion-icon>
+        </div>
+        <ion-range>
+          <ion-text slot="start">0:00</ion-text>
+          <ion-text slot="end">0:00</ion-text>
         </ion-range>
       </div>
+      <div class="player-settings">
+
+        <ion-icon name="list-sharp"></ion-icon>
+        <ion-icon name="desktop-sharp"></ion-icon>
+        <div class="range-width">
+          <ion-range [pin]="false" min="0" max="100" [value]="volume">
+            <ion-icon name="volume-high-sharp" slot="start"></ion-icon>
+          </ion-range>
+        </div>
+      </div>
     </div>
-  </div>
-</ion-item>
+  </ion-item>
+</ng-container>
 <ng-template #noPlaybackFound>
   <ion-label>
     <h2>No Playback Found.</h2>
     <ion-text>Please play a track.</ion-text>
   </ion-label>
+</ng-template>
+
+<ng-template #mobilePlayer>
+  <div class="player">
+    <div class="progress-bar">
+      <div class="progress" [style.width]="progress + '%'"></div>
+    </div>
+    <ion-row class="ion-no-padding">
+      <ion-col size="2" class="ion-no-padding">
+        <img [src]="player?.item?.album?.images | imageUrl">
+      </ion-col>
+      <ion-col size="8" class="ion-align-self-center">
+        <b>{{player?.item?.name || 'No Playback found'}}</b><br>
+        <span>{{player?.item?.artists | artistsName}}</span>
+      </ion-col>
+      <ion-col size="2" class="ion-text-center ion-no-padding ion-align-self-center">
+        <ion-icon name="play-sharp" color="dark" size="large"></ion-icon>
+      </ion-col>
+    </ion-row>
+  </div>
 </ng-template>

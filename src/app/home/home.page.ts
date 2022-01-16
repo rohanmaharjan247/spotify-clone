@@ -22,6 +22,15 @@ export class HomePage implements OnInit, OnDestroy {
 
   recommendations: any;
 
+  isDesktop = true;
+
+  slideOpts = {
+    slidesPerView: 2.4,
+    slidesOffsetBefore: 20,
+    spaceBetween: 20,
+    freeMode: true
+  }
+
   constructor(
     private helperService: HelpersService,
     private router: Router,
@@ -42,6 +51,7 @@ export class HomePage implements OnInit, OnDestroy {
       this.getFeaturedPlaylist();
       this.getNewReleases();
       this.getRecommendation();
+      this.isDesktop = this.helperService.getPlatform('desktop');
     }
   }
 

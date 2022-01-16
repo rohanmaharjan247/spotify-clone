@@ -8,7 +8,7 @@
     </ion-title>
     <ion-title slot="end">
       <ion-item>
-        <ion-label class="profile-name" slot="end">{{ profile?.display_name }}</ion-label>
+        <ion-label class="profile-name" slot="end" *ngIf="isDesktop">{{ profile?.display_name }}</ion-label>
         <ion-avatar slot="end" class="profile" id="profile-button">
           <ion-img class="profile-image" [src]="profile?.images?.[0].url"></ion-img>
         </ion-avatar>

@@ -18,16 +18,16 @@ const routes: Routes = [
   {
     path: 'playlists/:playlistId',
     loadChildren: () => import('./user/user-playlists/user-playlists.module').then( m => m.UserPlaylistsPageModule)
-  },  {
+  },
+  {
     path: 'library',
     loadChildren: () => import('./pages/library/library.module').then( m => m.LibraryPageModule)
   },
   {
     path: 'search',
     loadChildren: () => import('./pages/search/search.module').then( m => m.SearchPageModule)
-  },
-
-];
+  }
+]
 
 @NgModule({
   imports: [

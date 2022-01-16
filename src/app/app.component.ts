@@ -46,7 +46,7 @@ export class AppComponent implements OnInit, OnDestroy {
   ];
 
   isAuthenticated = false;
-
+  isDesktop = true;
   constructor(
     private titleService: Title,
     private titleCase: TitleCasePipe,
@@ -65,6 +65,7 @@ export class AppComponent implements OnInit, OnDestroy {
     this.toUnsubscribe$.complete();
   }
   ngOnInit(): void {
+    this.isDesktop = this.helperService.getPlatform('desktop');
   }
 
   setPageTitle(title: string) {

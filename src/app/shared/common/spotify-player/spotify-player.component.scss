@@ -69,3 +69,27 @@ ion-range {
 .player-icon{
   font-size: 1.5rem;
 }
+
+
+
+.player {
+  height: 55px;
+  background: var(--ion-color-light);
+  img {
+      height: 55px;
+  }
+  font-family: 'Spotify';
+  color: #fff;
+  font-size: small;
+
+  .progress-bar {
+      height: 2px;
+      width: 100%;
+      background: #707070;
+
+      .progress {
+          background: #fff;
+          height: 100%;
+      }
+  }
+}
