@@ -21,6 +21,8 @@ export class UserPlaylistsPage implements OnInit, OnDestroy {
 
   loading = false;
 
+  isDesktop = true;
+
   constructor(
     private avRoute: ActivatedRoute,
     private playlistsService: PlaylistsService,
@@ -40,6 +42,7 @@ export class UserPlaylistsPage implements OnInit, OnDestroy {
 
   ngOnInit() {
     this.getPlaylist();
+    this.isDesktop = this.helperService.getPlatform('desktop');
   }
 
   async getPlaylist() {

@@ -1,37 +1,39 @@
-<ng-container *ngIf="!loading">
-  <ng-container *ngIf="savedAlbums;else noPlaylistFound">
-    <ion-label class="library-playlist-header">
-      <h2 class="title-text">Albums</h2>
-    </ion-label>
-    <div class="main-card">
-      <ion-grid fixed>
-        <ion-row>
-          <ion-col sizeSm="12" sizeMd="3" *ngFor="let savedAlbum of savedAlbums">
-            <ion-card>
-              <div class="image-relative">
-                <ion-img [src]="savedAlbum.album.images?.[0].url" class="track-image"></ion-img>
-                <div class="play-icon">
-                  <ion-button class="play-button" (click)="playTrack()" shape="round">
-                    <ion-icon name="play-sharp"></ion-icon>
-                  </ion-button>
+<ng-container *ngIf="isDesktop; else mobileTemplate">
+  <ng-container *ngIf="!loading">
+    <ng-container *ngIf="savedAlbums;else noPlaylistFound">
+      <ion-label class="library-playlist-header">
+        <h2 class="title-text">Albums</h2>
+      </ion-label>
+      <div class="main-card">
+        <ion-grid fixed>
+          <ion-row>
+            <ion-col sizeSm="12" sizeMd="3" *ngFor="let savedAlbum of savedAlbums">
+              <ion-card>
+                <div class="image-relative">
+                  <ion-img [src]="savedAlbum.album.images?.[0].url" class="track-image"></ion-img>
+                  <div class="play-icon">
+                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                      <ion-icon name="play-sharp"></ion-icon>
+                    </ion-button>
+                  </div>
                 </div>
-              </div>
 
-              <ion-card-header>
-                <ion-card-title>
-                  <ion-label class="title-text-truncate">{{ savedAlbum.album.name }}</ion-label>
-                </ion-card-title>
-                <ion-card-subtitle>
-                  <ion-label class="text-truncate">
-                    {{ savedAlbum.album.artists | artistsName }}
-                  </ion-label>
-                </ion-card-subtitle>
-              </ion-card-header>
-            </ion-card>
-          </ion-col>
-        </ion-row>
-      </ion-grid>
-    </div>
+                <ion-card-header>
+                  <ion-card-title>
+                    <ion-label class="title-text-truncate">{{ savedAlbum.album.name }}</ion-label>
+                  </ion-card-title>
+                  <ion-card-subtitle>
+                    <ion-label class="text-truncate">
+                      {{ savedAlbum.album.artists | artistsName }}
+                    </ion-label>
+                  </ion-card-subtitle>
+                </ion-card-header>
+              </ion-card>
+            </ion-col>
+          </ion-row>
+        </ion-grid>
+      </div>
+    </ng-container>
   </ng-container>
 </ng-container>
 <ng-template #noPlaylistFound>
@@ -43,4 +45,8 @@
       <ion-button type="button" color="dark" class="no-playlists-fw">Find Albums</ion-button>
     </div>
   </div>
+</ng-template>
+
+<ng-template #mobileTemplate>
+
 </ng-template>

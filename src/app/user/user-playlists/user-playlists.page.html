@@ -1,5 +1,5 @@
-<app-toolbar-helper></app-toolbar-helper>
-<ion-content>
+<app-toolbar-helper title="Playlist"></app-toolbar-helper>
+<ion-content *ngIf="isDesktop; else mobileTemplate">
   <ng-container *ngIf="!loading">
     <ng-container *ngIf="playlist">
       <ion-grid class="playlist">
@@ -20,15 +20,16 @@
               </div>
               <div class="playlist-owner">
                 <div>
-                <ion-avatar class="playlist-profile-image">
-                  <ion-img [src]="playlist.owner | playlistProfileImage | async"></ion-img>
-                </ion-avatar>
-              </div>
+                  <ion-avatar class="playlist-profile-image">
+                    <ion-img [src]="playlist.owner | playlistProfileImage | async"></ion-img>
+                  </ion-avatar>
+                </div>
                 <div class="">
                   <ion-text class="playlist-owner-name">{{ playlist?.owner?.display_name }}</ion-text>
                 </div>
                 <div class="playlist-owner-total">
-                  <ion-text>{{ playlist?.tracks?.items?.length }} songs, {{ playlist?.tracks?.items | totalDuration }}</ion-text>
+                  <ion-text>{{ playlist?.tracks?.items?.length }} songs, {{ playlist?.tracks?.items | totalDuration }}
+                  </ion-text>
                 </div>
               </div>
             </div>
@@ -87,3 +88,52 @@
     </ng-container>
   </ng-container>
 </ion-content>
+<ng-template #mobileTemplate>
+  <ng-container *ngIf="playlist">
+    <ion-content [appImageFade]="cover" [fullscreen]="true" [scrollEvents]="true">
+      <div class="ion-text-center image-box" #cover>
+        <ion-img [src]="playlist?.images | imageUrl"></ion-img>
+      </div>
+      <ion-row class="mobile-content">
+        <ion-col size="12" class="content">
+          <p class="ion-no-margin ion-no-padding content-name">{{playlist?.name}}</p>
+          <p class="ion-no-margin ion-no-padding content-description">{{playlist?.description}}</p>
+          <p class="ion-no-margin ion-no-padding content-image">
+            <ion-avatar>
+              <img [src]="playlist.owner | playlistProfileImage | async" />
+            </ion-avatar>
+            <ion-text>{{ playlist?.owner?.display_name }}</ion-text>
+          </p>
+          <span class="ion-no-margin ion-no-padding content-description">
+            {{ playlist?.tracks?.items | totalDuration }}
+          </span>
+        </ion-col>
+        <ion-col size="8" class="ion-text-left ion-no-padding">
+          <ion-button fill="clear" class="ion-no-margin">
+            <ion-icon slot="icon-only" name="heart-outline" color="dark"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" class="ion-no-margin">
+            <ion-icon slot="icon-only" name="arrow-down-circle-outline" color="dark"></ion-icon>
+          </ion-button>
+          <ion-button fill="clear" class="ion-no-margin">
+            <ion-icon slot="icon-only" name="ellipsis-horizontal-outline" color="dark"></ion-icon>
+          </ion-button>
+        </ion-col>
+        <ion-col size="4" class="ion-text-right ion-no-padding">
+          <ion-button fill="clear">
+            <ion-icon name="play-circle" size="large" color="primary"></ion-icon>
+          </ion-button>
+        </ion-col>
+      </ion-row>
+      <ion-list>
+        <ion-item *ngFor="let tracks of playlist?.tracks?.items;">
+          <ion-label>
+            <span class="title-text-truncate">{{tracks.track?.name}}</span>
+            <p>{{tracks.track?.artists | artistsName}}</p>
+          </ion-label>
+          <ion-icon slot="end" size="small" name="ellipsis-horizontal" color="dark"></ion-icon>
+        </ion-item>
+      </ion-list>
+    </ion-content>
+  </ng-container>
+</ng-template>

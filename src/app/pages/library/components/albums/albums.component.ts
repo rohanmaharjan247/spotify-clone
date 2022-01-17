@@ -1,3 +1,4 @@
+import { HelpersService } from './../../../../shared/helpers.service';
 import { LoadingService } from './../../../../shared/helpers/services/loading.service';
 import { takeUntil } from 'rxjs/operators';
 import { AlbumsService } from './../../../../services/user/albums.service';
@@ -15,13 +16,16 @@ export class AlbumsComponent implements OnInit, OnDestroy {
   savedAlbums: any;
   loading = false;
 
-  constructor(private albumsService: AlbumsService, private loadingService: LoadingService) { }
+  isDesktop = true;
+
+  constructor(private albumsService: AlbumsService, private loadingService: LoadingService, private helperService: HelpersService) { }
   ngOnDestroy(): void {
     this.toUnsubsribe$.next();
     this.toUnsubsribe$.complete();
   }
 
   ngOnInit() {
+    this.isDesktop = this.helperService.getPlatform('desktop');
     this.getSavedAlbums();
   }
 

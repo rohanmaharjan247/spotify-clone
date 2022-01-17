@@ -11,6 +11,7 @@ import { PlaylistProfileImagePipe } from './pipes/playlist-profile-image.pipe';
 import { SpotifyPlayerComponent } from './common/spotify-player/spotify-player.component';
 import { TotalDurationPipe } from './pipes/total-duration.pipe';
 import { ImageUrlPipe } from './pipes/image-url.pipe';
+import { ImageFadeDirective } from './directives/image-fade.directive';
 
 const declarations = [
   NavComponent,
@@ -32,10 +33,15 @@ const pipes = [
   ImageUrlPipe,
 ]
 
+const directives = [
+  ImageFadeDirective
+]
+
 @NgModule({
   declarations: [
     ...declarations,
     ...pipes,
+    ...directives,
   ],
   imports: [
     CommonModule,
@@ -44,7 +50,8 @@ const pipes = [
   exports: [
     ...declarations,
     ...modules,
-    ...pipes
+    ...pipes,
+    ...directives
   ]
 })
 export class SharedModule { }
