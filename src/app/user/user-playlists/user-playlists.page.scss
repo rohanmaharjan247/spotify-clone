@@ -82,3 +82,8 @@
     margin-left: 1rem;
   }
 }
+
+.grad-bg{
+  z-index: 2;
+  background: linear-gradient(var(--gradient-background) 2%, var(--ion-color-light) 10%);
+}

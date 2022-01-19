@@ -1,4 +1,4 @@
-<ng-container *ngIf="isDesktop; else mobileTemplate">
+
   <ng-container *ngIf="!loading">
     <ng-container *ngIf="savedAlbums;else noPlaylistFound">
       <ion-label class="library-playlist-header">
@@ -35,7 +35,6 @@
       </div>
     </ng-container>
   </ng-container>
-</ng-container>
 <ng-template #noPlaylistFound>
   <div class="no-playlists">
     <div class="no-playlists-items">
@@ -45,8 +44,4 @@
       <ion-button type="button" color="dark" class="no-playlists-fw">Find Albums</ion-button>
     </div>
   </div>
-</ng-template>
-
-<ng-template #mobileTemplate>
-
 </ng-template>
