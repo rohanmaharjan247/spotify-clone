@@ -23,25 +23,29 @@ export class SpotifyPlayerComponent implements OnInit {
 
   progress = 50;
 
-  constructor(private playerService: PlayerService, private helperService: HelpersService) { }
+  constructor(
+    private playerService: PlayerService,
+    private helperService: HelpersService
+  ) {}
 
   ngOnInit() {
     this.getCurrentlyPlayingTrack();
     this.isDesktop = this.helperService.getPlatform('desktop');
   }
 
-  getCurrentlyPlayingTrack(){
-    this.playerService.getCurrentlyPlayingTrack().pipe(takeUntil(this.toUnsubscribe$)).subscribe((result: any) => {
-      console.log(result);
-      this.player = result;
-    })
+  getCurrentlyPlayingTrack() {
+    this.playerService
+      .getCurrentlyPlayingTrack()
+      .pipe(takeUntil(this.toUnsubscribe$))
+      .subscribe((result: any) => {
+        console.log(result);
+        this.player = result;
+      });
   }
 
-  playTrack(){
+  playTrack() {
     this.isPlaying = !this.isPlaying;
 
     this.playIcon = this.isPlaying ? 'pause' : 'play';
-
   }
-
 }

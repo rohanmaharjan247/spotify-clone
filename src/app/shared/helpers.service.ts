@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { Title } from '@angular/platform-browser';
 import { Injectable } from '@angular/core';
 import { Platform } from '@ionic/angular';
@@ -9,7 +10,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class HelpersService {
   private profile_image = new BehaviorSubject<string>(null);
-  constructor(private platform: Platform, private title: Title) {}
+  constructor(private platform: Platform, private title: Title, private router: Router) {}
 
   createAuthorizeUrl() {
     const params = new URLSearchParams({
@@ -22,7 +23,7 @@ export class HelpersService {
     return `${SPOTIFYAPI.SPOTIFY_API_URL}?${params.toString()}`;
   }
 
-  isAuthenticated(){
+  isAuthenticated() {
     return localStorage.getItem('authToken') !== null;
   }
 
@@ -46,15 +47,15 @@ export class HelpersService {
     return this.platform.is(platform);
   }
 
-  setTitle(title: string){
+  setTitle(title: string) {
     this.title.setTitle(`${title} - Spotify Clone`);
   }
 
-  getProfileImage(){
+  getProfileImage() {
     return this.profile_image;
   }
 
-  setProfileImage(profileImage: string){
+  setProfileImage(profileImage: string) {
     this.profile_image.next(profileImage);
   }
 }

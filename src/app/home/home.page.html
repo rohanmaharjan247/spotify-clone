@@ -43,11 +43,11 @@
           <ion-row>
             <ion-col sizeXs="12" sizeSm="12" sizeMd="3" sizeLg="3" sizeXl="1.5"
               *ngFor="let featuredPlaylist of featuredPlaylists">
-              <ion-card>
+              <ion-card routerDirection="root" [routerLink]="['/playlists', featuredPlaylist.id]">
                 <div class="image-relative">
                   <ion-img class="track-image" [src]="featuredPlaylist.images?.[0].url"></ion-img>
                   <div class="play-icon">
-                    <ion-button class="play-button" (click)="playTrack()" shape="round">
+                    <ion-button class="play-button" shape="round">
                       <ion-icon name="play-sharp"></ion-icon>
                     </ion-button>
                   </div>

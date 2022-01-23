@@ -28,8 +28,8 @@ export class HomePage implements OnInit, OnDestroy {
     slidesPerView: 2.4,
     slidesOffsetBefore: 20,
     spaceBetween: 20,
-    freeMode: true
-  }
+    freeMode: true,
+  };
 
   constructor(
     private helperService: HelpersService,
@@ -82,28 +82,33 @@ export class HomePage implements OnInit, OnDestroy {
       });
   }
 
-  getRecommendation(){
+  getRecommendation() {
     const seed_artists = this.spotifyWebService.getUsersTopArtists(2);
     const seed_tracks = this.spotifyWebService.getUserTopTracks(2);
 
-    forkJoin([seed_artists, seed_tracks]).pipe(
-      switchMap((result: any) => {
-        const seedartists = result[0]?.items?.map(a => a.id).join(',');
-        const seedtracks = result[1]?.items?.map(a => a.id).join(',');
-        const seedgenres = result[0]?.items?.map(a => a.genres)?.[0].splice(0, 1);
+    forkJoin([seed_artists, seed_tracks])
+      .pipe(
+        switchMap((result: any) => {
+          const seedartists = result[0]?.items?.map((a) => a.id).join(',');
+          const seedtracks = result[1]?.items?.map((a) => a.id).join(',');
+          const seedgenres = result[0]?.items
+            ?.map((a) => a.genres)?.[0]
+            .splice(0, 1);
 
-        return this.spotifyWebService.getRecommendation(seedtracks, seedartists, seedgenres)
-      }),
-      takeUntil(this.toUnsubscribe$)
-    ).subscribe((result: any) =>{
-     this.recommendations = result.tracks;
-
-    });
+          return this.spotifyWebService.getRecommendation(
+            seedtracks,
+            seedartists,
+            seedgenres
+          );
+        }),
+        takeUntil(this.toUnsubscribe$)
+      )
+      .subscribe((result: any) => {
+        this.recommendations = result.tracks;
+      });
   }
 
-  playTrack(){
-
-  }
+  playTrack() {}
 
   get greetings() {
     const currentHour = new Date().getHours();
@@ -117,8 +122,7 @@ export class HomePage implements OnInit, OnDestroy {
     }
   }
 
-  get profile()
-  {
+  get profile() {
     return localStorage.getItem('display_name');
   }
 }
